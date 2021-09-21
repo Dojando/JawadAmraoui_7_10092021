@@ -12,12 +12,13 @@
   <link rel="icon" type="image/png" href="./images/favicon_logo.png" />
   <title>Les petits plats</title>
 </head>
-<body class="container">
+<body>
   <header>
     <img class="logo_accueil" src="./images/logo.png" alt="logo du site 'Les petits plats'">    
   </header>
 
   <nav class="navbar">
+    <!-- champ de recherche principal -->
     <div class="champ_recherche">
       <input class="form-control form-control-lg" type="text" placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette" aria-label="Search">
       <span>
@@ -25,54 +26,240 @@
       </span>      
     </div>
 
+    <!-- liste des tags -->
     <div class="liste_tags">
-      <span class="badge badge-primary">Coco
+      <span class="badge badge_bleu">Coco
         <img src="./images/tag_fermer.png" alt="button de suppression d'un tag">
       </span>
-      <span class="badge badge-success">Coco
+      <span class="badge badge_vert">Coco
         <img src="./images/tag_fermer.png" alt="button de suppression d'un tag">
       </span>
-      <span class="badge badge-danger">Coco
+      <span class="badge badge_rouge">Coco
         <img src="./images/tag_fermer.png" alt="button de suppression d'un tag">
       </span>
     </div>
 
-    <div class="tags_menus">
-      <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Ingredients
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+    <!-- champs de recherche des tags -->
+    <div class="bloc_dropdown">
+        <!-- recherche d'ingrédients -->
+        <div class="recherche_tags">
+          <input data-toggle="collapse" data-target="#liste_ingredients" class="border-0 form-control champ_ingredient bg_bleu" type="text" placeholder="Ingrédients" aria-label="Search">
+          <img data-toggle="collapse" data-target="#liste_ingredients" class="img_champ" src="./images/menu_ferme.png" alt="logo d'etat du menu">
+
+          <!-- menu dropdown des ingrédients -->
+          <div class="dropdown_tags collapse bg_bleu" id="liste_ingredients">
+            <div class="tags">
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+            </div>
+          </div>      
         </div>
-      </div>
+
+        <!-- recherche d'appareil -->
+        <div class="recherche_tags">
+          <input data-toggle="collapse" data-target="#liste_appareil" class="border-0 form-control champ_appareil bg_vert" type="text" placeholder="Appareil" aria-label="Search">
+          <img data-toggle="collapse" data-target="#liste_appareil" class="img_champ" src="./images/menu_ferme.png" alt="logo d'etat du menu">
+
+          <!-- menu dropdown des ingrédients -->
+          <div class="dropdown_tags collapse bg_vert" id="liste_appareil">
+            <div class="tags">
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+            </div>
+          </div>      
+        </div>
+
+        <!-- recherche d'ustensiles -->
+        <div class="recherche_tags">
+          <input data-toggle="collapse" data-target="#liste_ustensiles" class="border-0 form-control champ_ustensiles bg_orange" type="text" placeholder="Ustensiles" aria-label="Search">
+          <img data-toggle="collapse" data-target="#liste_ustensiles" class="img_champ" src="./images/menu_ferme.png" alt="logo d'etat du menu">
+
+          <!-- menu dropdown des ingrédients -->
+          <div class="dropdown_tags collapse bg_orange" id="liste_ustensiles">
+            <div class="tags">
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+            </div>
+          </div>      
+        </div>
     </div>
   </nav>
 
+  <!-- liste des recettes -->
   <main>
     <div class="carte_recette card">
       <div class="card-img-top"></div>
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <div class="header_carte">
+          <h2 class="card-title">Limonade de Coco</h2>
+          <span class="recette_duree">
+            <img src="./images/temps_logo.png" alt="">
+            <p>10 min</p>
+          </span>
+        </div>
+        <div class="recette_contenu">
+          <div class="recette_ingredients">
+            <ul>
+              <li><span class="gras">Lait de coco:</span> 400ml</li>
+              <li><span class="gras">Lait de coco:</span> 400ml</li>
+              <li><span class="gras">Lait de coco:</span> 400ml</li>
+            </ul>
+          </div>
+          <div class="recette">
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="carte_recette card">
       <div class="card-img-top"></div>
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <div class="header_carte">
+          <h2 class="card-title">Limonade de Coco</h2>
+          <span class="recette_duree">
+            <img src="./images/temps_logo.png" alt="">
+            <p>10 min</p>
+          </span>
+        </div>
+        <div class="recette_contenu">
+          <div class="recette_ingredients">
+            <ul>
+              <li><span class="gras">Lait de coco:</span> 400ml</li>
+              <li><span class="gras">Lait de coco:</span> 400ml</li>
+              <li><span class="gras">Lait de coco:</span> 400ml</li>
+            </ul>
+          </div>
+          <div class="recette">
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="carte_recette card">
       <div class="card-img-top"></div>
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <div class="header_carte">
+          <h2 class="card-title">Limonade de Coco</h2>
+          <span class="recette_duree">
+            <img src="./images/temps_logo.png" alt="">
+            <p>10 min</p>
+          </span>
+        </div>
+        <div class="recette_contenu">
+          <div class="recette_ingredients">
+            <ul>
+              <li><span class="gras">Lait de coco:</span> 400ml</li>
+              <li><span class="gras">Lait de coco:</span> 400ml</li>
+              <li><span class="gras">Lait de coco:</span> 400ml</li>
+            </ul>
+          </div>
+          <div class="recette">
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="carte_recette card">
+      <div class="card-img-top"></div>
+      <div class="card-body">
+        <div class="header_carte">
+          <h2 class="card-title">Limonade de Coco</h2>
+          <span class="recette_duree">
+            <img src="./images/temps_logo.png" alt="">
+            <p>10 min</p>
+          </span>
+        </div>
+        <div class="recette_contenu">
+          <div class="recette_ingredients">
+            <ul>
+              <li><span class="gras">Lait de coco:</span> 400ml</li>
+              <li><span class="gras">Lait de coco:</span> 400ml</li>
+              <li><span class="gras">Lait de coco:</span> 400ml</li>
+            </ul>
+          </div>
+          <div class="recette">
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="carte_recette card">
+      <div class="card-img-top"></div>
+      <div class="card-body">
+        <div class="header_carte">
+          <h2 class="card-title">Limonade de Coco</h2>
+          <span class="recette_duree">
+            <img src="./images/temps_logo.png" alt="">
+            <p>10 min</p>
+          </span>
+        </div>
+        <div class="recette_contenu">
+          <div class="recette_ingredients">
+            <ul>
+              <li><span class="gras">Lait de coco:</span> 400ml</li>
+              <li><span class="gras">Lait de coco:</span> 400ml</li>
+              <li><span class="gras">Lait de coco:</span> 400ml</li>
+            </ul>
+          </div>
+          <div class="recette">
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="carte_recette card">
+      <div class="card-img-top"></div>
+      <div class="card-body">
+        <div class="header_carte">
+          <h2 class="card-title">Limonade de Coco</h2>
+          <span class="recette_duree">
+            <img src="./images/temps_logo.png" alt="">
+            <p>10 min</p>
+          </span>
+        </div>
+        <div class="recette_contenu">
+          <div class="recette_ingredients">
+            <ul>
+              <li><span class="gras">Lait de coco:</span> 400ml</li>
+              <li><span class="gras">Lait de coco:</span> 400ml</li>
+              <li><span class="gras">Lait de coco:</span> 400ml</li>
+            </ul>
+          </div>
+          <div class="recette">
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+        </div>
       </div>
     </div>
   </main>
