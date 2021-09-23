@@ -9,9 +9,10 @@ const rechercheIng = document.getElementsByClassName('recherche_ingredient')[0];
 const rechercheApp = document.getElementsByClassName('recherche_appareil')[0];
 const rechercheUst = document.getElementsByClassName('recherche_ustensiles')[0];
 const listeIngredient = document.getElementById('liste_ingredients');
-const listeApperail = document.getElementById('liste_appareil');
+const listeAppareil = document.getElementById('liste_appareil');
 const listeUstensiles = document.getElementById('liste_ustensiles');
 
+let listes = [listeIngredient, listeAppareil, listeUstensiles];
 
 // ajout de la mise en forme dynamique des dropdowns
 
@@ -29,33 +30,54 @@ champsPlaceholder(champAppareil, "Recherche un appareil", "Appareil");
 champsPlaceholder(champUstensiles, "Recherche un ustensiles", "Ustensiles");
 
 dropdownsLogique(imgIngredient, listeIngredient, champIngredient, rechercheIng);
-dropdownsLogique(imgAppareil, listeApperail, champAppareil, rechercheApp);
+dropdownsLogique(imgAppareil, listeAppareil, champAppareil, rechercheApp);
 dropdownsLogique(imgUstensiles, listeUstensiles, champUstensiles, rechercheUst);
 
 function dropdownsLogique(img, liste, champ, recherche) {
-  for (let i = 0; i < rechercheTags.length; i++) {
-    img.addEventListener('click', function() {
-      // fermeture du dropdown au clic sur la fleche
-      if (liste.classList.contains('show') === true) {
-        liste.classList.remove("show");
-        img.setAttribute("src", "./images/menu_ferme.png");
-        champ.style.borderRadius = "5px 5px 5px 5px"
-        recherche.style.width = '170px';
-        champ.blur();
-      } else if (liste.classList.contains('show') === false) {
-        // appelle de la fonction d'ouverture du dropdown
-        overtureDropdown(champ, liste, img, recherche);
+  img.addEventListener('click', function() {
+    if (liste.classList.contains('show') === true) {
+      // appelle de la fonction de fermeture du dropdown au clic sur la fleche
+      fermetureDropdown(liste, img, champ, recherche);
+    } else if (liste.classList.contains('show') === false) {
+      // fermeture des dropdown deja ouvert
+      if (listes[0].classList.contains('show') === true) {
+        fermetureDropdown(listeIngredient, imgIngredient, champIngredient, rechercheIng);
+      } else if (listes[1].classList.contains('show') === true) {
+        fermetureDropdown(listeAppareil, imgAppareil, champAppareil, rechercheApp);
+      } else if (listes[2].classList.contains('show') === true) {
+        fermetureDropdown(listeUstensiles, imgUstensiles, champUstensiles, rechercheUst);
       }
-    })
-    
-    champ.addEventListener('click', function() {
-      if (liste.classList.contains('show') === false) {
-        overtureDropdown(champ, liste, img, recherche);
+      // appelle de la fonction d'ouverture du dropdown au clic sur la fleche
+      overtureDropdown(champ, liste, img, recherche);
+    }
+  })
+  
+  champ.addEventListener('click', function() {
+    if (liste.classList.contains('show') === false) {
+      // fermeture des dropdown deja ouvert
+      if (listes[0].classList.contains('show') === true) {
+        fermetureDropdown(listeIngredient, imgIngredient, champIngredient, rechercheIng);
+      } else if (listes[1].classList.contains('show') === true) {
+        fermetureDropdown(listeAppareil, imgAppareil, champAppareil, rechercheApp);
+      } else if (listes[2].classList.contains('show') === true) {
+        fermetureDropdown(listeUstensiles, imgUstensiles, champUstensiles, rechercheUst);
       }
-    })    
-  }
+      // appelle de la fonction d'ouverture du dropdown au clic sur l'input
+      overtureDropdown(champ, liste, img, recherche);
+    }
+  })    
 }
 
+// fonction de fermeture du dropdown
+function fermetureDropdown(liste, img, champ, recherche) {
+  liste.classList.remove("show");
+  img.setAttribute("src", "./images/menu_ferme.png");
+  champ.style.borderRadius = "5px 5px 5px 5px"
+  recherche.style.width = '170px';
+  champ.blur();
+}
+
+// fonction d'ouverture du dropdown
 function overtureDropdown(champ, liste, img, recherche) {
   champ.focus();
   liste.classList.add("show");
