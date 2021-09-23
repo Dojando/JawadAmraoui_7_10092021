@@ -8,6 +8,7 @@
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script defer src="./app.js"></script>
   <link rel="stylesheet" href="./style.css">
   <link rel="icon" type="image/png" href="./images/favicon_logo.png" />
   <title>Les petits plats</title>
@@ -42,9 +43,9 @@
     <!-- champs de recherche des tags -->
     <div class="bloc_dropdown">
         <!-- recherche d'ingrédients -->
-        <div class="recherche_tags">
-          <input data-toggle="collapse" data-target="#liste_ingredients" class="border-0 form-control champ_ingredient bg_bleu" type="text" placeholder="Ingrédients" aria-label="Search">
-          <img data-toggle="collapse" data-target="#liste_ingredients" class="img_champ" src="./images/menu_ferme.png" alt="logo d'etat du menu">
+        <div class="recherche_tags recherche_ingredient">
+          <input data-target="#liste_ingredients" class="border-0 form-control champ_ingredient bg_bleu" type="text" placeholder="Ingrédients" aria-label="Search">
+          <img data-target="#liste_ingredients" class="img_champ img_ingredient" src="./images/menu_ferme.png" alt="logo d'etat du menu">
 
           <!-- menu dropdown des ingrédients -->
           <div class="dropdown_tags collapse bg_bleu" id="liste_ingredients">
@@ -67,13 +68,18 @@
         </div>
 
         <!-- recherche d'appareil -->
-        <div class="recherche_tags">
-          <input data-toggle="collapse" data-target="#liste_appareil" class="border-0 form-control champ_appareil bg_vert" type="text" placeholder="Appareil" aria-label="Search">
-          <img data-toggle="collapse" data-target="#liste_appareil" class="img_champ" src="./images/menu_ferme.png" alt="logo d'etat du menu">
+        <div class="recherche_tags recherche_appareil">
+          <input data-target="#liste_appareil" class="border-0 form-control champ_appareil bg_vert" type="text" placeholder="Appareil" aria-label="Search">
+          <img data-target="#liste_appareil" class="img_champ img_appareil" src="./images/menu_ferme.png" alt="logo d'etat du menu">
 
           <!-- menu dropdown des ingrédients -->
           <div class="dropdown_tags collapse bg_vert" id="liste_appareil">
             <div class="tags">
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
+              <p>Citron vert</p>
               <p>Citron vert</p>
               <p>Citron vert</p>
               <p>Citron vert</p>
@@ -87,13 +93,15 @@
         </div>
 
         <!-- recherche d'ustensiles -->
-        <div class="recherche_tags">
-          <input data-toggle="collapse" data-target="#liste_ustensiles" class="border-0 form-control champ_ustensiles bg_orange" type="text" placeholder="Ustensiles" aria-label="Search">
-          <img data-toggle="collapse" data-target="#liste_ustensiles" class="img_champ" src="./images/menu_ferme.png" alt="logo d'etat du menu">
+        <div class="recherche_tags recherche_ustensiles">
+          <input data-target="#liste_ustensiles" class="border-0 form-control champ_ustensiles bg_orange" type="text" placeholder="Ustensiles" aria-label="Search">
+          <img data-target="#liste_ustensiles" class="img_champ img_ustensiles" src="./images/menu_ferme.png" alt="logo d'etat du menu">
 
           <!-- menu dropdown des ingrédients -->
           <div class="dropdown_tags collapse bg_orange" id="liste_ustensiles">
             <div class="tags">
+              <p>Citron vert</p>
+              <p>Citron vert</p>
               <p>Citron vert</p>
               <p>Citron vert</p>
               <p>Citron vert</p>

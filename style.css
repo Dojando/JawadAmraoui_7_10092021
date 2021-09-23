@@ -135,6 +135,7 @@ body {
   padding-right: 40px;
   color: white;
   height: 65px;
+  border-radius: 5px 5px 5px 5px;
 }
 
 .recherche_tags input::placeholder {
