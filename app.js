@@ -1,3 +1,4 @@
+// definitions des variables
 const champIngredient = document.getElementsByClassName('champ_ingredient')[0];
 const champAppareil = document.getElementsByClassName('champ_appareil')[0];
 const champUstensiles = document.getElementsByClassName('champ_ustensiles')[0];
@@ -13,6 +14,22 @@ const listeAppareil = document.getElementById('liste_appareil');
 const listeUstensiles = document.getElementById('liste_ustensiles');
 
 let listes = [listeIngredient, listeAppareil, listeUstensiles];
+let tableauRecette = [];
+let tableauRecetteFiltre = [];
+
+// recuperation des données du site
+fetch("./data.json")
+  .then(function(res) {
+    return res.json();
+  })
+  .then(function(data) {
+    console.log(data);
+  })
+
+
+
+  // rendre la recherche case insensitive
+
 
 // ajout de la mise en forme dynamique des dropdowns
 

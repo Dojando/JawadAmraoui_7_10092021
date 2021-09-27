@@ -205,6 +205,7 @@ main {
 }
 
 .card-body {
+  height: 178px;
   background-color: #E7E7E7;
 }
 
@@ -229,6 +230,7 @@ main {
 }
 
 .recette_contenu {
+  height: 80%;
   display: flex;
   font-size: 0.7em;
 }
@@ -243,19 +245,42 @@ main {
 
 .recette_ingredients, .recette {
   flex: 1;
+  height: 100px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 
 /* mise en forme responsive */
+
 @media all and (max-width: 395px) {
   .header_carte, .recette_contenu {
     flex-direction: column;
+  }
+
+  .card-body {
+    height: auto;
+  }
+
+  .recette {
+    flex: none;
+    height: auto;
+  }
+
+  .recette_contenu {
+    height: auto;
   }
 }
 
 @media all and (max-width: 767px) {
   main {
     justify-content: center;
+  }
+}
+
+@media all and (max-width: 800px) {
+  body {
+    max-width: 730px;
   }
 }
 
@@ -269,8 +294,3 @@ main {
   }
 }
 
-@media all and (max-width: 800px) {
-  body {
-    max-width: 730px;
-  }
-}
