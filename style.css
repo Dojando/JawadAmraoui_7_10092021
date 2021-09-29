@@ -209,12 +209,20 @@ main {
   background-color: #E7E7E7;
 }
 
+.carte_contenu {
+  height: 100%;
+  overflow: hidden;
+  -webkit-column-width: 150px;
+  column-width: 150px;
+}
+
 .header_carte {
   display: flex;
   justify-content: space-between;
 }
 
 .header_carte h2 {
+  max-width: 190px;
   font-weight: 500;
   font-size: 1.2em;
 }

@@ -9,6 +9,7 @@ const rechercheTags = document.getElementsByClassName('recherche_tags');
 const rechercheIng = document.getElementsByClassName('recherche_ingredient')[0];
 const rechercheApp = document.getElementsByClassName('recherche_appareil')[0];
 const rechercheUst = document.getElementsByClassName('recherche_ustensiles')[0];
+const listeRecette = document.getElementsByClassName('liste_recette')[0];
 const listeIngredient = document.getElementById('liste_ingredients');
 const listeAppareil = document.getElementById('liste_appareil');
 const listeUstensiles = document.getElementById('liste_ustensiles');
@@ -17,6 +18,7 @@ let listes = [listeIngredient, listeAppareil, listeUstensiles];
 let tableauRecette = [];
 let tableauRecetteFiltre = [];
 
+
 // recuperation des données du site
 fetch("./data.json")
   .then(function(res) {
@@ -24,14 +26,72 @@ fetch("./data.json")
   })
   .then(function(data) {
     console.log(data);
+    tableauRecette = data.recipes;
+    console.log(tableauRecette);
+    affichageRecette();
   })
+
 
 
 
   // rendre la recherche case insensitive
 
 
-// ajout de la mise en forme dynamique des dropdowns
+
+// affichage dynamique des recettes
+function affichageRecette() {
+  listeRecette.innerHTML = "";
+  for (let i in tableauRecette) {
+    listeRecette.innerHTML += `
+      <div class="carte_recette card">
+        <div class="card-img-top"></div>
+        <div class="card-body">
+          <div class="carte_contenu">
+            <div class="header_carte">
+              <h2 class="card-title">${tableauRecette[i].name}</h2>
+              <div class="recette_duree">
+                <img src="./images/temps_logo.png" alt="">
+                <p>${tableauRecette[i].time} min</p>
+              </div>
+            </div>
+            <div class="recette_contenu">
+              <div class="recette_ingredients">
+                <ul class="recette_ingredients_liste">
+                </ul>
+              </div>
+              <div class="recette">
+                <p class="card-text">${tableauRecette[i].description}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    const recetteIngredientsListe = document.getElementsByClassName('recette_ingredients_liste')[i];
+    for (let x in tableauRecette[i].ingredients) {
+      let ingredient = tableauRecette[i].ingredients[x].ingredient+":";
+      let quantity = tableauRecette[i].ingredients[x].quantity;
+      let unit = tableauRecette[i].ingredients[x].unit;
+      if (ingredient == undefined) {
+        ingredient = "";
+      }
+      if ((quantity == undefined) && (unit == undefined)) {
+        ingredient = tableauRecette[i].ingredients[x].ingredient;
+      }
+      if (quantity == undefined) {
+        quantity = "";
+      }
+      if (unit == undefined) {
+        unit = "";
+      }
+      recetteIngredientsListe.innerHTML += `
+      <li><span class="gras">${ingredient}</span> ${quantity} ${unit}</li>`
+    }
+  }
+}
+
+
+  // ajout de la mise en forme dynamique des dropdowns
 
 // changement dynmaique des messages polaceholder
 function champsPlaceholder(champ, focusMsg, focusoutMsg) {

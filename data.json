@@ -3,8 +3,11 @@
     "crème de coco", "sucre", "glaçons", "thon rouge (ou blanc)", "concombre", "tomate", "carotte", "citron vert", "poulet", "coulis de tomate", "oignon", "poivron rouge", "huile d'olive", "riz blanc", "thon en miettes", "oeuf dur", "maïs", "vinaigrette", "pâte feuilletée", "crème fraiche", "gruyère râpé", "moutarde de dijon", "pâte brisée", "pomme", "oeuf", "sucre en poudre", "sucre vanillé", "pâte sablée", "chocolat au lait", "crème liquide", "beurre", "fraise", "noix", "chocolat noir", "farine", "olives", "fromage de chèvre", "vinaigre balsamic", "basilic", "roblochon", "pommes de terre", "jambon fumé", "vin blanc sec", "tomates cerises", "mozzarella", "jambon de parme", "pommes", "salade verte", "rhubarbe", "eau", "mâche", "échalote", "vinaigre de cidre", "saucisse bretonne ou de toulouse", "farine de blé noir", "fromage à raclette", "lait", "beurre salé", "banane", "pennes", "huile d'olives", "pastèque", "menthe", "ananas", "glace à la vanille", "kiwi", "citron", "sucre glace", "tagliatelles", "lardons", "parmesan", "spaghettis", "viande hachée 1% de matière grasse", "vin rouge", "crème fraîche", "macaronis", "mayonnaise", "chocolat noir en pepites", "ail", "oseille", "vermicelles", "poireau", "crême fraîche", "pois chiches", "paprika", "pois cassé", "haricots verts", "petits poids", "pain de mie", "blanc de dinde", "emmental", "gruyère", "noix de muscade", "saumon fumé", "feuilles de laitue", "fromage blanc", "patate douce", "orange", "cumin", "courgette",
     "lasagnes", "maïzena", "viande hachée", "coulis de tomates", "pain", "sucre roux", "bicarbonate", "chocolat", "poires au jus", "boudoirs", "beurre fondu", "pruneaux", "mascarpone", "pâte à pizza", "tomates pelées", "champignons de paris", "bananes", "kiwis", "mangue", "miel", "poudre d'amendes"
     ],
+
     "ustensiles": ["cuillère à Soupe", "verres", "presse citron", "couteau", "saladier", "passoire", "moule à tarte", "râpe à fromage", "fourchette", "moule à tartelettes (6)", "casserole", "moule à gateaux", "cuillère en bois", "plat à gratin", "économe", "cuillère à melon", "poelle à frire", "louche", "fouet", "rouleau à patisserie", "plaque de cuisson", "cocotte minute", "bol", "spatule", "moule"],
+
     "appareil": ["blender", "saladier", "cocotte", "cuiseur de riz", "four", "casserole", "poële à crêpe", "sauteuse", "mixer", "poële", "moule à charlotte"],
+    
     "recipes": [
     {
         "id": 1,
@@ -27,7 +30,7 @@
             },
             {
                 "ingredient" : "Sucre",
-                "quantite" : 30,
+                "y" : 30,
                 "unit" : "grammes"
             },
             {
@@ -59,7 +62,7 @@
             },
             {
                 "ingredient" : "Carotte",
-                "quantite" : 1
+                "quantity" : 1
             },
             {
                 "ingredient" : "Citron Vert",
