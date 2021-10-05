@@ -13,11 +13,20 @@ const listeRecette = document.getElementsByClassName('liste_recette')[0];
 const listeIngredient = document.getElementById('liste_ingredients');
 const listeAppareil = document.getElementById('liste_appareil');
 const listeUstensiles = document.getElementById('liste_ustensiles');
+const tagsListeIngredients = document.getElementsByClassName('tags_ingredients')[0];
+const tagsListeAppareil = document.getElementsByClassName('tags_appareil')[0];
+const tagsListeUstensiles = document.getElementsByClassName('tags_ustensiles')[0];
+const listeTags = document.getElementsByClassName('liste_tags')[0];
 
+let dataSite = {};
 let listes = [listeIngredient, listeAppareil, listeUstensiles];
 let tableauRecette = [];
 let tableauRecetteFiltre = [];
-
+let tagsIngredients = [];
+let tagsIngredientsDisponible = [];
+let tagsAppareil = [];
+let tagsUstensiles = [];
+// rendre la recherche case insensitive
 
 // recuperation des données du site
 fetch("./data.json")
@@ -26,15 +35,131 @@ fetch("./data.json")
   })
   .then(function(data) {
     console.log(data);
+    dataSite = data;
     tableauRecette = data.recipes;
+    tagsIngredients = [...data.ingredients];
+    tagsAppareil = [...data.appareil];
+    tagsUstensiles = [...data.ustensiles];
+    selectedTagsIngredients = [];
+    selectedTagsAppareil = [];
+    selectedTagsUstensiles = [];
     console.log(tableauRecette);
-    affichageRecette();
+    affichageTagsIngredients(tagsIngredients);
+    filtrageRecette(tableauRecette);
   })
 
 
+// affichageTagsIngredients();
+// affichageTagsAppareil();
 
 
-  // rendre la recherche case insensitive
+
+function filtrageRecette(recette) {
+  let test = [...tableauRecette];
+  test.push(5);
+  console.log(tableauRecette);
+  console.log(test);
+  affichageRecette(recette);
+}
+
+
+function affichageTagsIngredients(tagsIng) {
+  tagsListeIngredients.innerHTML = "";
+  console.log(tagsIng);
+  if (listeIngredient.classList.contains('show')) {
+    if (tagsIng.length == 1) {
+      rechercheIng.style.width = '220px';
+    }
+    if (tagsIng.length == 2) {
+      rechercheIng.style.width = '400px';
+    }
+    if (tagsIng.length > 2) {
+      rechercheIng.style.width = '650px';
+    }
+  }
+  for (let i in tagsIng) {
+    tagsListeIngredients.innerHTML += `<a class="tag_ingredient" href=""><p>${tagsIng[i]}</p></a>`;
+  }
+  logiqueTagsIngredients()
+}
+
+function logiqueTagsIngredients() {
+  const tagIngredient = document.getElementsByClassName('tag_ingredient');
+  for (let x = 0; x < tagIngredient.length; x++) {
+    tagIngredient[x].addEventListener('click', function(e) {
+      e.preventDefault();
+      recuperationTagIngDispo();
+      selectedTagsIngredients.push(this.textContent);
+      console.log(selectedTagsIngredients);
+      recuperationTagIngDispo();
+      affichageTagsIngredients(tagsIngredientsDisponible);
+      badgeTagsIngredients();
+    })
+  }
+}
+
+// appelez cette function parametré
+function badgeTagsIngredients() {
+  listeTags.innerHTML = "";
+  for (let i = 0; i < selectedTagsIngredients.length; i++) {
+    listeTags.innerHTML += `
+      <span class="badge badge_bleu">${selectedTagsIngredients[i]}<img src="./images/tag_fermer.png" alt="button de suppression d'un tag"></span>`;   
+  }
+  badgeSuppression();
+}
+
+function badgeSuppression() {
+  const badge = document.getElementsByClassName('badge');
+  console.log(listeTags.childElementCount);
+  for (let y = 0; y < listeTags.children.length; y++) {
+    badge[y].addEventListener('click', function() { 
+      selectedTagsIngredients.splice(selectedTagsIngredients.indexOf(badge[y].textContent), 1);
+      recuperationTagIngDispo();
+      badgeTagsIngredients();
+      affichageTagsIngredients(tagsIngredientsDisponible);
+    })
+  }
+}
+
+// recuperation des tags ingrédients disponible
+function recuperationTagIngDispo() {
+  tagsIngredients = [...dataSite.ingredients]
+  console.log("tagIng "+tagsIngredients.length);
+  console.log("tagDispo "+tagsIngredientsDisponible.length);
+  tagsIngredientsDisponible = [...tagsIngredients];
+  console.log("tagDispo "+tagsIngredientsDisponible.length);
+  if (selectedTagsIngredients.length > 0) {
+    for (let i = 0; i < selectedTagsIngredients.length; i++) {
+      tagsIngredientsDisponible.splice(tagsIngredientsDisponible.indexOf(selectedTagsIngredients[i]), 1);
+    }
+  }
+  console.log("apres");
+  console.log("tagIng "+tagsIngredients.length);
+  console.log("tagDispo "+tagsIngredientsDisponible.length);
+}
+
+// champ de recherche ingredient
+champIngredient.addEventListener('input', function() {
+  if (champIngredient.value.length == 0) {
+    recuperationTagIngDispo();
+    affichageTagsIngredients(tagsIngredientsDisponible);
+  }
+  if (champIngredient.value.length > 0) {
+    
+    let champValue = champIngredient.value;
+    let filtreTagsIng = [];
+    recuperationTagIngDispo();
+    for (let i = 0; i < tagsIngredientsDisponible.length; i++) {
+      if (tagsIngredientsDisponible[i].includes(champValue)) {
+        filtreTagsIng.push(tagsIngredientsDisponible[i]);
+      }
+    }
+    affichageTagsIngredients(filtreTagsIng);
+  }
+})
+
+
+
 
 
 
@@ -149,7 +274,7 @@ function dropdownsLogique(img, liste, champ, recherche) {
 function fermetureDropdown(liste, img, champ, recherche) {
   liste.classList.remove("show");
   img.setAttribute("src", "./images/menu_ferme.png");
-  champ.style.borderRadius = "5px 5px 5px 5px"
+  champ.style.borderRadius = "5px 5px 5px 5px";
   recherche.style.width = '170px';
   champ.blur();
 }
@@ -159,21 +284,10 @@ function overtureDropdown(champ, liste, img, recherche) {
   champ.focus();
   liste.classList.add("show");
   img.setAttribute("src", "./images/menu_ouvert.png");
-  champ.style.borderRadius = "5px 5px 0px 0px"
+  champ.style.borderRadius = "5px 5px 0px 0px";
   recherche.style.width = '650px';
 }
 
-
-// fermeture des dropdown quand on click a l'exterieur
-
-// document.addEventListener('click', function(e) {
-//   if ((listeIng.classList.contains('show') === true) && (imgIngredient != e.target || champIngredient != e.target || rechercheIng != e.target || listeIng != e.target)) {
-//     listeIng.classList.remove("show");
-//     imgIngredient.setAttribute("src", "./images/menu_ferme.png");
-//     rechercheIng.style.width = '170px';
-//   }
-//   console.log(e.target);
-// })
 
 
 

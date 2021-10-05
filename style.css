@@ -182,8 +182,10 @@ body {
   padding: 0 15px;
 }
 
-.tags p {
+.tags a {
   width: 165px;
+  color: white;
+  text-decoration: none;
 }
 
 /* mise en forme des cartes de recettes */
