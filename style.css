@@ -60,7 +60,7 @@ body {
 }
 
 /* Mise en forme des tags selectionné */
-.liste_tags {
+.liste_tags_ingredients, .liste_tags_appareil, .liste_tags_ustensiles {
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 10px;
