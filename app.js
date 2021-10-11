@@ -2,6 +2,7 @@
 const champIngredient = document.getElementsByClassName('champ_ingredient')[0];
 const champAppareil = document.getElementsByClassName('champ_appareil')[0];
 const champUstensiles = document.getElementsByClassName('champ_ustensiles')[0];
+const champPrincipal = document.getElementsByClassName('champ_principal')[0];
 const imgIngredient = document.getElementsByClassName('img_ingredient')[0];
 const imgAppareil = document.getElementsByClassName('img_appareil')[0];
 const imgUstensiles = document.getElementsByClassName('img_ustensiles')[0];
@@ -39,7 +40,6 @@ fetch("./data.json")
     return res.json();
   })
   .then(function(data) {
-    console.log(data);
     dataSite = data;
     tableauRecette = data.recipes;
     tagsIngredients = [...data.ingredients];
@@ -48,13 +48,20 @@ fetch("./data.json")
     selectedTagsIngredients = [];
     selectedTagsAppareil = [];
     selectedTagsUstensiles = [];
-    console.log(tableauRecette);
     affichageTagsIngredients(tagsIngredients);
     affichageTagsAppareil(tagsAppareil);
     affichageTagsUstensiles(tagsUstensiles)
     filtrageRecette();
   })
 
+
+
+// Appel de la fonction filtrageRecette a chaque entrée dans le champ principal, et si value.length >= 3
+champPrincipal.addEventListener('input', function() {
+  if (champPrincipal.value.length >= 2) {
+    filtrageRecette();    
+  }
+});
 
 function filtrageRecette() {
   let listeRecette = [...tableauRecette];
@@ -71,7 +78,6 @@ function filtrageRecette() {
         }
         if (valid == false) {
           listeRecette.splice(z, 1);
-          console.log(listeRecette.length);
           z = -1;
         }
       }
@@ -88,7 +94,6 @@ function filtrageRecette() {
         }
         if (valid == false) {
           listeRecette.splice(z, 1);
-          console.log(listeRecette.length);
           z = -1;
         }
       }
@@ -107,11 +112,40 @@ function filtrageRecette() {
         }
         if (valid == false) {
           listeRecette.splice(z, 1);
-          console.log(listeRecette.length);
           z = -1;
         }
       }
     }
+  }
+
+
+  // verification des input
+  if (champPrincipal.value.length >= 3) {
+    let champValue = champPrincipal.value.toLowerCase();
+    let recetteValid = [];
+    for (let i = 0; i < listeRecette.length; i++) {
+      let titreRecette = listeRecette[i].name.toLowerCase();
+      let descriptionRecette = listeRecette[i].description.toLowerCase();
+      let ingRecette = [];
+      for (let n in listeRecette[i].ingredients) {
+        ingRecette.push(listeRecette[i].ingredients[n].ingredient.toLowerCase());
+      }
+      if (titreRecette.split(champValue).length > 1) {
+        recetteValid.push(listeRecette[i]);
+        continue;
+      }
+      if (descriptionRecette.split(champValue).length > 1) {
+        recetteValid.push(listeRecette[i]);
+        continue;
+      }
+      for (let z in ingRecette) {
+        if (ingRecette[z].split(champValue).length > 1) {
+          recetteValid.push(listeRecette[i]);
+          continue;
+        }
+      }
+    }
+    listeRecette = recetteValid;
   }
 
   // recuperation des tags des recettes disponible
@@ -141,11 +175,9 @@ function filtrageRecette() {
     }
   }
 
-  console.log(tagRecupIng);
   tagsIngredients = [...tagRecupIng];
   tagsAppareil = [...tagRecupApp];
   tagsUstensiles = [...tagRecupUst];
-  console.log(tagsIngredients);
 
   affichageRecette(listeRecette);
   recuperationTagIngDispo()
@@ -160,7 +192,6 @@ function filtrageRecette() {
 
 function affichageTagsIngredients(tagsIng) {
   tagsListeIngredients.innerHTML = "";
-  console.log(tagsIng);
   if (listeIngredient.classList.contains('show')) {
     if (tagsIng.length == 1) {
       rechercheIng.style.width = '220px';
@@ -185,7 +216,6 @@ function logiqueTagsIngredients() {
       e.preventDefault();
       recuperationTagIngDispo();
       selectedTagsIngredients.push(this.textContent);
-      console.log(selectedTagsIngredients);
       recuperationTagIngDispo();
       affichageTagsIngredients(tagsIngredientsDisponible);
       badgeTagsIngredients();
@@ -206,10 +236,8 @@ function badgeTagsIngredients() {
 // logique de suppression de tag
 function badgeSuppressionIng() {
   const badgeIng = document.querySelectorAll('.liste_tags_ingredients .badge');
-  console.log(badgeIng);
-  console.log(listeTagsIng.childElementCount);
   for (let y = 0; y < listeTagsIng.children.length; y++) {
-    badgeIng[y].addEventListener('click', function() { 
+    badgeIng[y].querySelector("img").addEventListener('click', function() { 
       selectedTagsIngredients.splice(selectedTagsIngredients.indexOf(badgeIng[y].textContent), 1);
       recuperationTagIngDispo();
       badgeTagsIngredients();
@@ -221,7 +249,6 @@ function badgeSuppressionIng() {
 
 // recuperation des tags ingrédients disponible
 function recuperationTagIngDispo() {
-  // tagsIngredients = [...dataSite.ingredients]
   tagsIngredientsDisponible = [...tagsIngredients];
   if (selectedTagsIngredients.length > 0) {
     for (let i = 0; i < selectedTagsIngredients.length; i++) {
@@ -256,7 +283,6 @@ champIngredient.addEventListener('input', function() {
 
 function affichageTagsAppareil(tagsApp) {
   tagsListeAppareil.innerHTML = "";
-  console.log(tagsApp);
   if (listeAppareil.classList.contains('show')) {
     if (tagsApp.length == 1) {
       rechercheApp.style.width = '220px';
@@ -281,7 +307,6 @@ function logiqueTagsAppareil() {
       e.preventDefault();
       recuperationTagAppDispo();
       selectedTagsAppareil.push(this.textContent);
-      console.log(selectedTagsAppareil);
       recuperationTagAppDispo();
       affichageTagsAppareil(tagsAppareilDisponible);
       badgeTagsAppareil();
@@ -301,10 +326,8 @@ function badgeTagsAppareil() {
 
 function badgeSuppressionApp() {
   const badgeApp = document.querySelectorAll('.liste_tags_appareil .badge');
-  console.log(listeTagsApp.childElementCount);
   for (let y = 0; y < listeTagsApp.children.length; y++) {
-    badgeApp[y].addEventListener('click', function() { 
-      console.log("test")
+    badgeApp[y].querySelector("img").addEventListener('click', function() { 
       selectedTagsAppareil.splice(selectedTagsAppareil.indexOf(badgeApp[y].textContent), 1);
       recuperationTagAppDispo();
       badgeTagsAppareil();
@@ -351,7 +374,6 @@ champAppareil.addEventListener('input', function() {
 
 function affichageTagsUstensiles(tagsUst) {
   tagsListeUstensiles.innerHTML = "";
-  console.log(tagsUst);
   if (listeUstensiles.classList.contains('show')) {
     if (tagsUst.length == 1) {
       rechercheUst.style.width = '220px';
@@ -376,7 +398,6 @@ function logiqueTagsUstensiles() {
       e.preventDefault();
       recuperationTagUstDispo();
       selectedTagsUstensiles.push(this.textContent);
-      console.log(selectedTagsUstensiles);
       recuperationTagUstDispo();
       affichageTagsUstensiles(tagsUstensilesDisponible);
       badgeTagsUstensiles();
@@ -396,10 +417,8 @@ function badgeTagsUstensiles() {
 
 function badgeSuppressionUst() {
   const badgeUst = document.querySelectorAll('.liste_tags_ustensiles .badge');
-  console.log(listeTagsUst.childElementCount);
   for (let y = 0; y < listeTagsUst.children.length; y++) {
-    badgeUst[y].addEventListener('click', function() { 
-      console.log("test")
+    badgeUst[y].querySelector("img").addEventListener('click', function() { 
       selectedTagsUstensiles.splice(selectedTagsUstensiles.indexOf(badgeUst[y].textContent), 1);
       recuperationTagUstDispo();
       badgeTagsUstensiles();
@@ -411,7 +430,6 @@ function badgeSuppressionUst() {
 
 // recuperation des tags ingrédients disponible
 function recuperationTagUstDispo() {
-  // tagsUstensiles = [...dataSite.ustensiles]
   tagsUstensilesDisponible = [...tagsUstensiles];
   if (selectedTagsUstensiles.length > 0) {
     for (let i = 0; i < selectedTagsUstensiles.length; i++) {
