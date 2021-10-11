@@ -118,33 +118,26 @@ function filtrageRecette() {
     }
   }
 
-
   // verification des input
   if (champPrincipal.value.length >= 3) {
     let champValue = champPrincipal.value.toLowerCase();
-    let recetteValid = [];
-    for (let i = 0; i < listeRecette.length; i++) {
-      let titreRecette = listeRecette[i].name.toLowerCase();
-      let descriptionRecette = listeRecette[i].description.toLowerCase();
+    let recetteValid = listeRecette.filter(function(el, index) {
+      let valid = false;
+      let titreRecette = el.name.toLowerCase();
+      let descriptionRecette = el.description.toLowerCase();
       let ingRecette = [];
-      for (let n in listeRecette[i].ingredients) {
-        ingRecette.push(listeRecette[i].ingredients[n].ingredient.toLowerCase());
-      }
-      if (titreRecette.split(champValue).length > 1) {
-        recetteValid.push(listeRecette[i]);
-        continue;
-      }
-      if (descriptionRecette.split(champValue).length > 1) {
-        recetteValid.push(listeRecette[i]);
-        continue;
-      }
-      for (let z in ingRecette) {
-        if (ingRecette[z].split(champValue).length > 1) {
-          recetteValid.push(listeRecette[i]);
-          continue;
+      el.ingredients.forEach(function(element) {
+        ingRecette.push(element.ingredient.toLowerCase());
+      })
+      ingRecette.forEach(function(ing) {
+        if (ing.includes(champValue) == true) {
+          valid = true;
         }
+      })
+      if ((titreRecette.includes(champValue) == true) || (descriptionRecette.includes(champValue) == true) || (valid == true)) {
+        return true;
       }
-    }
+    })
     listeRecette = recetteValid;
   }
 
